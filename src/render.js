@@ -117,7 +117,7 @@ const byDepth = (blocks) => {
  */
 const renderGroup = (group, blockRenderers, rendered, params, options) => {
   const {
-    prevType: type, prevDepth: depth, prevKeys: keys, prevData: data,
+    prevType: type, prevDepth: depth, prevKeys: keys, prevData: data, className,
   } = params;
   // in case current group is empty it should not be rendered
   if (group.length === 0) {
@@ -128,6 +128,7 @@ const renderGroup = (group, blockRenderers, rendered, params, options) => {
     const props = {
       depth,
       keys,
+      className: className && className.length ? className : undefined,
     };
     if (data && data.some(item => !!item)) {
       props.data = data;
@@ -159,8 +160,12 @@ const renderBlocks = (
   let prevKeys = [];
   let prevData = [];
   let splitGroup = false;
+  let className;
   const Parser = new RawParser({ flat: !!stylesRenderer });
   blocks.forEach((block) => {
+    if (options.blockStyleFn && typeof options.blockStyleFn === 'function') {
+      className = options.blockStyleFn(block);
+    }
     if (checkCleanup(block, prevType, options)) {
       // Set the split flag if enabled
       if (options.cleanup.split === true) {
@@ -186,7 +191,7 @@ const renderBlocks = (
         blockRenderers,
         rendered,
         {
-          prevType, prevDepth, prevKeys, prevData,
+          prevType, prevDepth, prevKeys, prevData, className,
         },
         options,
       );
@@ -196,6 +201,7 @@ const renderBlocks = (
       prevKeys = [];
       group = [];
       splitGroup = false;
+      className = undefined;
     }
     // handle children
     if (block.children) {
@@ -213,7 +219,7 @@ const renderBlocks = (
     // push current node to group
     group.push(renderedNode);
 
-    // lastly save current type for refference
+    // lastly save current type for reference
     prevType = block.type;
     prevDepth = block.depth;
     prevKeys.push(block.key);
@@ -225,7 +231,7 @@ const renderBlocks = (
     blockRenderers,
     rendered,
     {
-      prevType, prevDepth, prevKeys, prevData,
+      prevType, prevDepth, prevKeys, prevData, className,
     },
     options,
   );
