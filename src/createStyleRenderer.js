@@ -26,7 +26,6 @@ const createStyleRenderer = (wrapper, stylesMap) => (children, styleArray, param
     if (customStyleFn && typeof customStyleFn === 'function') {
       const customStyles = customStyleFn(styleArray);
       style = Object.assign(style, customStyles);
-      console.log(style);
     }
 
     return wrapper(Object.assign({}, { children }, params, { style }));
