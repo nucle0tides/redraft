@@ -20,8 +20,17 @@ const reduceStyles = (styleArray, stylesMap) => styleArray
  * Returns a styleRenderer from a customStyleMap and a wrapper callback (Component)
  */
 const createStyleRenderer = (wrapper, stylesMap) => (children, styleArray, params) => {
-  const style = reduceStyles(styleArray, stylesMap);
-  return wrapper(Object.assign({}, { children }, params, { style }));
+  let style = reduceStyles(styleArray, stylesMap);
+
+  return (customStyleFn) => {
+    if (customStyleFn && typeof customStyleFn === 'function') {
+      const customStyles = customStyleFn(styleArray);
+      style = Object.assign(style, customStyles);
+      console.log(style);
+    }
+
+    return wrapper(Object.assign({}, { children }, params, { style }));
+  };
 };
 
 export default createStyleRenderer;

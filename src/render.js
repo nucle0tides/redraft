@@ -22,7 +22,7 @@ export const renderNode = (
   keyGenerator,
 ) => {
   if (node.styles && styleRenderers) {
-    return styleRenderers(checkJoin(node.content, options), node.styles, { key: keyGenerator() });
+    return styleRenderers(checkJoin(node.content, options), node.styles, { key: keyGenerator() })(options.customStyleFn);
   }
   let children = [];
   let index = 0;

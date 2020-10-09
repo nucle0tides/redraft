@@ -8,6 +8,7 @@ const defaultOptions = {
   },
   blockFallback: 'unstyled',
   blockStyleFn: undefined,
+  customStyleFn: undefined
 };
 
 export default defaultOptions;
