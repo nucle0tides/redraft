@@ -1,5 +1,5 @@
 {
-  "name": "redraft",
+  "name": "@nucle0tides/redraft",
   "version": "0.10.2",
   "description": "Renders the result of Draft.js convertToRaw using provided callbacks, works well with React",
   "main": "./lib/index.js",
@@ -11,9 +11,10 @@
     "jest": "jest",
     "test": "npm run lint && npm run jest"
   },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nucle0tides/redraft.git"
+    "url": "ssh://git@github.com:nucle0tides/redraft.git"
   },
   "keywords": [
     "draftjs",
