@@ -251,7 +251,7 @@ export const render = (raw, renderers = {}, options = {}) => {
     styles: stylesRenderer,
     decorators,
   } = renderers;
-  // If decorators are present, they are maped with the blocks array
+  // If decorators are present, they are mapped with the blocks array
   const blocksWithDecorators = decorators ? withDecorators(raw, decorators, options) : raw.blocks;
   // Nest blocks by depth
   const blocks = byDepth(blocksWithDecorators);
