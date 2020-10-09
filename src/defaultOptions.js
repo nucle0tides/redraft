@@ -7,6 +7,7 @@ const defaultOptions = {
     split: true,
   },
   blockFallback: 'unstyled',
+  customStyleFn: undefined,
 };
 
 export default defaultOptions;
