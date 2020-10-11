@@ -9,9 +9,12 @@
     "lint": "eslint src",
     "prepublish": "npm run compile && npm test",
     "jest": "jest",
+    "jest:debug": "NODE_ENV=test node --inspect node_modules/.bin/jest --runInBand",
     "test": "npm run lint && npm run jest"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com:nucle0tides/redraft.git"
@@ -36,10 +39,12 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.0",
+    "@testing-library/react": "^11.0.4",
     "babel-eslint": "10.0.1",
     "babel-jest": "^24.0.0",
     "babel-plugin-array-includes": "^2.0.3",
     "chai": "^4.2.0",
+    "classnames": "^2.2.6",
     "draft-js": "^0.10.4",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "17.1.0",

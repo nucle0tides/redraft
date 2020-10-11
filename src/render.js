@@ -47,7 +47,9 @@ export const renderNode = (
     }
   });
   if (node.style && inlineRenderers[node.style]) {
-    return inlineRenderers[node.style](checkJoin(children, options), { key: keyGenerator() });
+    return inlineRenderers[node.style](
+      checkJoin(children, options), { key: keyGenerator() },
+    )(options.customStyleFn);
   }
   if (node.entity !== null) {
     const entity = entityMap[node.entity];
@@ -167,7 +169,8 @@ const renderBlocks = (
   const Parser = new RawParser({ flat: !!stylesRenderer });
   blocks.forEach((block) => {
     if (options.blockStyleFn && typeof options.blockStyleFn === 'function') {
-      className = options.blockStyleFn(block);
+      const blockClass = options.blockStyleFn(block);
+      className = blockClass && blockClass.length ? blockClass : undefined;
     }
     if (checkCleanup(block, prevType, options)) {
       // Set the split flag if enabled
