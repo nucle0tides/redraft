@@ -1,3 +1,162 @@
+export const reviewIpsum = {
+  "blocks": [
+    {
+      "key": "db2mm",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "align": "center"
+      }
+    },
+    {
+      "key": "6vm1t",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7odut",
+      "text": "\"This is the nicest and most pleasant storage company I have ever dealt with. Not only is the staff exceptionally helpful, but they go out of their way to give the best customer service. The building is very clean. I was very impressed with the range of different units available. I highly recommend CatStorageMart for all your self storage and packing supplies needs!\"",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 366,
+          "style": "FONT_FAMILY:primary"
+        },
+        {
+          "offset": 0,
+          "length": 366,
+          "style": "FONT_SIZE:18"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "align": "center"
+      }
+    },
+    {
+      "key": "affq9",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "align": "center"
+      }
+    },
+    {
+      "key": "8l8ar",
+      "text": "- Allie O., Google",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 18,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "align": "center"
+      }
+    },
+    {
+      "key": "avpfv",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {}
+};
+
+export const catIpsum = {
+  "blocks": [
+    {
+      "key": "db2mm",
+      "text": "Walk on keyboard ",
+      "type": "header-two",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        align: 'center',
+      }
+    },
+    {
+      "key": "fnj8h",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "13idm",
+      "text": "cat cat moo moo lick ears lick paws lay on arms while you're using the keyboard but kitty poochy, run off table persian cat jump eat fish, proudly present butt to human yet climb a tree, wait for a fireman jump to fireman then scratch his face. ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "4sp39",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "a9eg1",
+      "text": "Pet my belly, you know you want to; seize the hand and shred it! snuggles up to shoulders or knees and purrs you to sleep. Pee in the shoe slap kitten brother with paw eat owner's food cats are a queer kind of folk. Proudly present butt to human. Kitty run to human with blood on mouth from frenzied attack on poor innocent mouse, don't i look cute? mark territory destroy house in 5 seconds or chase dog then run away but thinking longingly about tuna brine yet tickle my belly at your own peril i will pester for food when you're in the kitchen even if it's salad . Chew iPad power cord kick up litter.",
+      "type": "header-one",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 65,
+          "style": "BOLD"
+        },
+        {
+          "offset": 0,
+          "length": 65,
+          "style": "ITALIC"
+        },
+        {
+          "offset": 0,
+          "length": 65,
+          "style": "UNDERLINE"
+        },
+        {
+          "offset": 568,
+          "length": 36,
+          "style": "COLOR:#e4175a"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {}
+};
+
 export const raw = {
   entityMap: {
     0: {

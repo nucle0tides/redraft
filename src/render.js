@@ -47,7 +47,9 @@ export const renderNode = (
     }
   });
   if (node.style && inlineRenderers[node.style]) {
-    return inlineRenderers[node.style](checkJoin(children, options), { key: keyGenerator() });
+    return inlineRenderers[node.style](
+      checkJoin(children, options), { key: keyGenerator() },
+    );
   }
   if (node.entity !== null) {
     const entity = entityMap[node.entity];
@@ -120,7 +122,7 @@ const byDepth = (blocks) => {
  */
 const renderGroup = (group, blockRenderers, rendered, params, options) => {
   const {
-    prevType: type, prevDepth: depth, prevKeys: keys, prevData: data, className,
+    type, depth, key, keys, data, className,
   } = params;
   // in case current group is empty it should not be rendered
   if (group.length === 0) {
@@ -130,12 +132,12 @@ const renderGroup = (group, blockRenderers, rendered, params, options) => {
   if (renderCb) {
     const props = {
       depth,
+      key,
       keys,
+      data,
       className: className && className.length ? className : undefined,
     };
-    if (data && data.some(item => !!item)) {
-      props.data = data;
-    }
+
     rendered.push(renderCb(group, props));
     return;
   }
@@ -194,7 +196,7 @@ const renderBlocks = (
         blockRenderers,
         rendered,
         {
-          prevType, prevDepth, prevKeys, prevData, className,
+          type: prevType, depth: prevDepth, keys: prevKeys, data: prevData, className,
         },
         options,
       );
@@ -234,10 +236,87 @@ const renderBlocks = (
     blockRenderers,
     rendered,
     {
-      prevType, prevDepth, prevKeys, prevData, className,
+      type: prevType, depth: prevDepth, keys: prevKeys, data: prevData, className,
     },
     options,
   );
+  return checkJoin(rendered, options);
+};
+
+// come up w/ a better name/way of handling this
+// don't particularly care to rework the entire lib and tests right now
+const renderBlocksWithoutCleanup = (
+  blocks,
+  inlineRenderers = {},
+  blockRenderers = {},
+  entityRenderers = {},
+  stylesRenderer,
+  emptyBlockRenderer,
+  entityMap = {},
+  userOptions = {},
+) => {
+  const options = Object.assign({}, defaultOptions, userOptions);
+  const rendered = [];
+
+  let className;
+  const Parser = new RawParser({ flat: !!stylesRenderer });
+
+  blocks.forEach((block, idx) => {
+    // if block is empty, render a <br />
+    if (emptyBlockRenderer && block.type === 'unstyled' && (!block.text || !block.text.trim().length)) {
+      const { key } = block;
+      rendered.push(emptyBlockRenderer(key));
+      return;
+    }
+
+    // otherwise, render
+    if (options.blockStyleFn && typeof options.blockStyleFn === 'function') {
+      const blockClass = options.blockStyleFn(block);
+      className = blockClass && blockClass.length ? blockClass : undefined;
+    }
+
+    const node = Parser.parse(block);
+    const renderedNode = renderNode(
+      node,
+      inlineRenderers,
+      entityRenderers,
+      stylesRenderer,
+      entityMap,
+      options,
+      getKeyGenerator(),
+    );
+
+    if (block.children) {
+      const childNodes = children.map(
+        renderBlocks(
+          block.children,
+          inlineRenderers,
+          blockRenderers,
+          entityRenderers,
+          stylesRenderer,
+          entityMap,
+          options,
+        ),
+      );
+      renderedNode.push(children);
+    }
+
+    const { type, data, key, depth } = block;
+    renderGroup(
+      [renderedNode],
+      blockRenderers,
+      rendered,
+      {
+        type,
+        data,
+        key: `${key}-${idx}-${block.type}`,
+        depth,
+        className
+      },
+      options,
+    );
+  });
+
   return checkJoin(rendered, options);
 };
 
@@ -258,12 +337,28 @@ export const render = (raw, renderers = {}, options = {}) => {
     blocks: blockRenderers,
     entities: entityRenderers,
     styles: stylesRenderer,
+    emptyBlocks: emptyBlockRenderer,
     decorators,
   } = renderers;
   // If decorators are present, they are maped with the blocks array
   const blocksWithDecorators = decorators ? withDecorators(raw, decorators, options) : raw.blocks;
   // Nest blocks by depth
   const blocks = byDepth(blocksWithDecorators);
+
+  // figure out a better way to do this
+  // or just redo all the tests since you're only using this for work anyway
+  if (options.renderWithoutCleanup) {
+    return renderBlocksWithoutCleanup(
+      blocks,
+      inlineRenderers,
+      blockRenderers,
+      entityRenderers,
+      stylesRenderer,
+      emptyBlockRenderer,
+      raw.entityMap,
+      options,
+    );
+  }
   return renderBlocks(
     blocks,
     inlineRenderers,

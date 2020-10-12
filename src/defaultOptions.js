@@ -9,6 +9,7 @@ const defaultOptions = {
   blockFallback: 'unstyled',
   blockStyleFn: undefined,
   customStyleFn: undefined,
+  renderWithoutCleanup: false,
 };
 
 export default defaultOptions;
