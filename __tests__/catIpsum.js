@@ -2,10 +2,11 @@ import React from 'react';
 import cx from 'classnames';
 import { render } from '@testing-library/react';
 import redraft from '../src';
-import { catIpsum } from './utils/raws';
+import { catIpsum, reviewIpsum } from './utils/raws';
 import createBlockRenderer from '../src/createBlockRenderer';
 import createStylesRenderer from '../src/createStyleRenderer';
 
+// cleanup later
 const HEADER_ONE = 'header-one';
 const HEADER_TWO = 'header-two';
 const HEADER_THREE = 'header-three';
@@ -137,11 +138,11 @@ const applyInlineStyles = (draftInlineStyle) => {
 const applyBlockStyles = (contentBlock) => {
   const type = contentBlock.type;
   const data = contentBlock.data;
-  const align = contentBlock.align;
+  const align = data.align;
 
   return cx(
     type === UNSTYLED && 'paragraph',
-    align && `${align}`,
+    align && `align--${align}`,
   );
 };
 
@@ -153,7 +154,7 @@ const Inline = ({
 
 const BlockWrapper = (type, { key, className, style }, children) => React.createElement(
   'div',
-  { key },
+  null,
   React.createElement(type, { key, style, className }, children),
 );
 
@@ -165,17 +166,16 @@ const entities = {
 const renderers = {
   styles: createStylesRenderer(Inline, inlineStyleMap),
   blocks: createBlockRenderer(BlockWrapper, blockRenderMap),
+  emptyBlocks: (key) => (<br key={`${key}-line-break`}/>),
   entities,
 };
 
 const options = {
   blockStyleFn: applyBlockStyles,
   customStyleFn: applyInlineStyles,
-  cleanup: {
-    types: 'all',
-    after: 'all',
-  },
+  renderWithoutCleanup: true,
 };
+
 const Content = ({ rawContentState }) => (
   <React.Fragment>
     {redraft(rawContentState, renderers, options)}
@@ -184,6 +184,10 @@ const Content = ({ rawContentState }) => (
 
 it('renders correctly', () => {
   const component = render(<Content rawContentState={catIpsum} />)
-  /* component.debug(); */
+  expect(component.asFragment()).toMatchSnapshot();
+});
+
+it('renders correctly', () => {
+  const component = render(<Content rawContentState={reviewIpsum} />)
   expect(component.asFragment()).toMatchSnapshot();
 });

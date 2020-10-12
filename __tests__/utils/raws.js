@@ -1,3 +1,88 @@
+export const reviewIpsum = {
+  "blocks": [
+    {
+      "key": "db2mm",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "align": "center"
+      }
+    },
+    {
+      "key": "6vm1t",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7odut",
+      "text": "\"This is the nicest and most pleasant storage company I have ever dealt with. Not only is the staff exceptionally helpful, but they go out of their way to give the best customer service. The building is very clean. I was very impressed with the range of different units available. I highly recommend CatStorageMart for all your self storage and packing supplies needs!\"",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 366,
+          "style": "FONT_FAMILY:primary"
+        },
+        {
+          "offset": 0,
+          "length": 366,
+          "style": "FONT_SIZE:18"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "align": "center"
+      }
+    },
+    {
+      "key": "affq9",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "align": "center"
+      }
+    },
+    {
+      "key": "8l8ar",
+      "text": "- Allie O., Google",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 18,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "align": "center"
+      }
+    },
+    {
+      "key": "avpfv",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {}
+};
+
 export const catIpsum = {
   "blocks": [
     {

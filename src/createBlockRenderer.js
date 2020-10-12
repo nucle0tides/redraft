@@ -22,6 +22,7 @@ const getBlock = (element, wrapper) => (
   const blockKey = getKey(props, key);
   delete props.depth;
   delete props.keys;
+  if (!props.data || (props.data.length && !props.data.some(item => !!item))) delete props.data;
   return wrapper(
     element,
     Object.assign({}, props, { key: blockKey }),
